@@ -5,7 +5,7 @@ export const getStaticProps = async () => {
 
   const GQLClient = new GraphQLClient(url, {
     headers: {
-      Authorization: process.env.NEXT_PUBLIC_DISNEY_TOKEN
+      Authorization: process.env.DISNEY_TOKEN
     }
   });
 
