@@ -13,6 +13,12 @@ a {
   text-decoration: none;
 }
 
+.navbar {
+  width: 100%;
+  height: 80px;
+  display: flex;
+}
+
 .app {
   margin: 20px;
 }
@@ -35,4 +41,25 @@ a {
   border-radius: 5%;
   margin: 5px;
   filter: drop-shadow(5px 5px 10px #000);
+}
+
+.video-image {
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+.info {
+  position: relative;
+  margin-top: 30%;
+  margin-left: 50px;
+  max-width: 50%;
+}
+
+.video-overlay {
+  position: absolute;
+}
+
+.info-footer {
+  height: 100vh;
 }
