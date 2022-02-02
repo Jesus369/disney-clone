@@ -1,4 +1,5 @@
 import { gql, GraphQLClient } from "graphql-request";
+import Link from "next/Link";
 import Section from "../components/Section";
 import Navbar from "../components/Navbar";
 
@@ -77,19 +78,67 @@ const Home = ({ videos, account }) => {
         </div>
 
         <div className="video-feed">
-          <Section
-            genre={"Recommended for you"}
-            videos={unSeenVideos(videos)}
-          />
-          <Section genre={"action"} videos={filterVideos(videos, "family")} />
-          <Section genre={"comedy"} videos={filterVideos(videos, "comedy")} />
-          <Section genre={"family"} videos={filterVideos(videos, "family")} />
-          <Section genre={"fantasy"} videos={filterVideos(videos, "fantasy")} />
-          <Section
-            genre={"superhero"}
-            videos={filterVideos(videos, "superhero")}
-          />
+          <Link href="#disney">
+            <a className="franchise">
+              <div id="disney">DISNEY</div>
+            </a>
+          </Link>
+          <Link href="#pixar">
+            <a className="franchise">
+              <div id="pixar">PIXAR</div>
+            </a>
+          </Link>
+          <Link href="#star-wars">
+            <a className="franchise">
+              <div id="star-wars">STAR WARS</div>
+            </a>
+          </Link>
+          <Link href="#nat-geo">
+            <a className="franchise">
+              <div id="nat-geo">NATIONAL GEOGRAPHY</div>
+            </a>
+          </Link>
+          <Link href="#marvel">
+            <a className="franchise">
+              <div id="marvel">MARVEL</div>
+            </a>
+          </Link>
         </div>
+
+        <Section genre={"Recommended for you"} videos={unSeenVideos(videos)} />
+        <Section genre={"action"} videos={filterVideos(videos, "family")} />
+        <Section genre={"comedy"} videos={filterVideos(videos, "comedy")} />
+        <Section genre={"family"} videos={filterVideos(videos, "family")} />
+        <Section genre={"fantasy"} videos={filterVideos(videos, "fantasy")} />
+        <Section
+          genre={"superhero"}
+          videos={filterVideos(videos, "superhero")}
+        />
+        <Section
+          id="disney"
+          genre={"Disney"}
+          videos={filterVideos(videos, "disney")}
+        />
+        <Section
+          id="pixar"
+          genre={"Pixar"}
+          videos={filterVideos(videos, "pixar")}
+        />
+        <Section
+          id="star-wars"
+          genre={"Star Wars"}
+          videos={filterVideos(videos, "star-wars")}
+        />
+        <Section
+          id="nat-geo"
+          genre={"National Geography"}
+          videos={filterVideos(videos, "nat-geo")}
+        />
+        <Section
+          id="marvel"
+          genre={"Marvel"}
+          videos={filterVideos(videos, "marvel")}
+        />
       </div>
     </>
   );
