@@ -9,7 +9,8 @@ export const getServerSideProps = async pctx => {
       Authorization: process.env.DISNEY_TOKEN
     }
   });
-  const getVideo = gql`
+
+  const query = gql`
     query($pageSlug: String!) {
       video(where: { slug: $pageSlug }) {
         id
@@ -32,14 +33,25 @@ export const getServerSideProps = async pctx => {
     pageSlug
   };
 
-  const data = await GQLClient.request(getVideo, variables);
+  const data = await GQLClient.request(query, variables);
   const video = data.video;
-  console.log(video);
+
   return {
     props: {
       video
     }
   };
+};
+
+const changeToSeen = async slug => {
+  console.log("changing");
+  await fetch("/api/changeToSeen", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ slug })
+  });
 };
 
 const Video = ({ video }) => {
@@ -63,6 +75,7 @@ const Video = ({ video }) => {
           <button
             className="video-overlay"
             onClick={() => {
+              changeToSeen(video.slug);
               watching ? setWatching(false) : setWatching(true);
             }}
           >

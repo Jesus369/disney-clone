@@ -27,16 +27,32 @@ export const getStaticProps = async () => {
     }
   `;
 
+  const accountQuery = gql`
+    query {
+      account(where: { id: "ckynqxdug018y0b25vxnw67lp" }) {
+        username
+        avatar {
+          url
+        }
+      }
+    }
+  `;
+
   const data = await GQLClient.request(query);
   const videos = data.videos;
+
+  const accountData = await GQLClient.request(accountQuery);
+  const account = accountData.account;
+
   return {
     props: {
-      videos
+      videos,
+      account
     }
   };
 };
 
-const Home = ({ videos }) => {
+const Home = ({ videos, account }) => {
   const randomVideo = videos => {
     return videos[Math.floor(Math.random() * videos.length)];
   };
@@ -46,12 +62,12 @@ const Home = ({ videos }) => {
   };
 
   const unSeenVideos = videos => {
-    return videos.filter(video => video.seen == false || videos.seen == null);
+    return videos.filter(video => video.seen === false || videos.seen === null);
   };
 
   return (
     <>
-      <Navbar />
+      <Navbar account={account} />
       <div className="app">
         <div className="main-video">
           <img
